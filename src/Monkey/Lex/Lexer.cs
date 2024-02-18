@@ -1,5 +1,7 @@
 // Ignore Spelling: Lexer
 
+
+
 namespace Monkey.Lex;
 
 public class Lexer
@@ -19,6 +21,8 @@ public class Lexer
 
     public Token NextToken()
     {
+        SkipWhitespace();
+
         Token tok;
         switch (_ch)
         {
@@ -82,6 +86,20 @@ public class Lexer
 
         ReadChar();
         return tok;
+    }
+
+    private void SkipWhitespace()
+    {
+        while (IsWhitespace(_ch))
+        {
+            ReadChar();
+        }
+    }
+
+    private bool IsWhitespace(byte ch)
+    {
+        return ch == ' ' || ch == '\t' ||
+            ch == '\r' || ch == '\n';
     }
 
     private string LookupIdentifier(string literal)

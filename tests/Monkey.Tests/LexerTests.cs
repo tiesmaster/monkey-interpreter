@@ -32,7 +32,7 @@ public class LexerTests
             10 != 9;
             """;
 
-        ExpectedToken[] expectedTokens = [
+        Token[] expectedTokens = [
             new (Tokens.Let, "let" ),
             new (Tokens.Ident, "five" ),
             new (Tokens.Assign, "=" ),
@@ -116,10 +116,12 @@ public class LexerTests
         {
             var token = lexer.NextToken();
 
-            token.Type.Should().Be(expectedToken.ExpectedType);
-            token.Literal.Should().Be(expectedToken.ExpectedLiteral);
+            token.Should().BeEquivalentTo(expectedToken);
+
+            //token.Type.Should().Be(expectedToken.ExpectedType);
+            //token.Literal.Should().Be(expectedToken.ExpectedLiteral);
         }
     }
 
-    private record ExpectedToken(string ExpectedType, string ExpectedLiteral);
+    //private record ExpectedToken(string ExpectedType, string ExpectedLiteral);
 }
