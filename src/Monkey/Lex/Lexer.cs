@@ -111,6 +111,11 @@ public class Lexer
         {
             ["fn"] = Tokens.Function,
             ["let"] = Tokens.Let,
+            ["if"] = Tokens.If,
+            ["else"] = Tokens.Else,
+            ["return"] = Tokens.Return,
+            ["true"] = Tokens.True,
+            ["false"] = Tokens.False,
         };
 
         return keywords.TryGetValue(literal, out var tokenType)
