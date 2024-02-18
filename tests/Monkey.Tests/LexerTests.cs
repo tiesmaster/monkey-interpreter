@@ -1,3 +1,5 @@
+// Ignore Spelling: Lexer
+
 using Monkey.Lex;
 
 namespace Monkey.Tests;
@@ -9,8 +11,17 @@ public class LexerTests
     {
         // arrange
         var input = "=+(){},;";
+
         ExpectedToken[] expectedTokens = [
-            new (Tokens.Illegal, "=" ),
+            new (Tokens.Assign, "=" ),
+            new (Tokens.Plus, "+" ),
+            new (Tokens.LParen, "(" ),
+            new (Tokens.RParen, ")" ),
+            new (Tokens.LBrace, "{" ),
+            new (Tokens.RBrace, "}" ),
+            new (Tokens.Comma, "," ),
+            new (Tokens.Semicolon, ";" ),
+            new (Tokens.Eof, "" ),
             ];
 
         var lexer = new Lexer(input);
