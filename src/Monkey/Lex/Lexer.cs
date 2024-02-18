@@ -73,12 +73,12 @@ public class Lexer
                 if (IsInteger(_ch))
                 {
                     var literal = ReadInteger();
-                    tok = new(Tokens.Int, literal);
+                    return new(Tokens.Int, literal);
                 }
                 else if (IsLetter(_ch))
                 {
                     var literal = ReadIdentifier();
-                    tok = new(LookupIdentifier(literal), literal);
+                    return new(LookupIdentifier(literal), literal);
                 }
                 else
                 {

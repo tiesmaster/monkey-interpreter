@@ -1,5 +1,7 @@
 // Ignore Spelling: Lexer
 
+// Ignore Spelling: Lexer
+
 using Monkey.Lex;
 
 namespace Monkey.Tests;
@@ -123,6 +125,24 @@ public class LexerTests
             //token.Type.Should().Be(expectedToken.ExpectedType);
             //token.Literal.Should().Be(expectedToken.ExpectedLiteral);
         }
+    }
+
+    [Fact]
+    public void LexerShouldnotEatSemicolon()
+    {
+        // arrange
+        var input = "let;";
+        var lexer = new Lexer(input);
+
+        // act
+        var token1 = lexer.NextToken();
+        var token2 = lexer.NextToken();
+        var token3 = lexer.NextToken();
+
+        // assert
+        token1.Type.Should().Be(Tokens.Let);
+        token2.Type.Should().Be(Tokens.Semicolon);
+        token3.Type.Should().Be(Tokens.Eof);
     }
 
     //private record ExpectedToken(string ExpectedType, string ExpectedLiteral);
