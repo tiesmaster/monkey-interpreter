@@ -1,4 +1,4 @@
-namespace Monkey.Lexer;
+namespace Monkey.Lex;
 
 public record Token(
     string Type,

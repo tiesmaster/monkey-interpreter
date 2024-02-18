@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey", "src\Monkey\Monkey.csproj", "{2F7D4E8A-6D58-4C2B-B317-43580699B0D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Tests", "tests\Monkey.Tests\Monkey.Tests.csproj", "{A769ACE5-6F70-45EA-A004-1CA386B16FD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +17,15 @@ Global
 		{2F7D4E8A-6D58-4C2B-B317-43580699B0D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F7D4E8A-6D58-4C2B-B317-43580699B0D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F7D4E8A-6D58-4C2B-B317-43580699B0D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A769ACE5-6F70-45EA-A004-1CA386B16FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A769ACE5-6F70-45EA-A004-1CA386B16FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A769ACE5-6F70-45EA-A004-1CA386B16FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A769ACE5-6F70-45EA-A004-1CA386B16FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3C5CDCB-6997-42D1-AD6C-607D50DB4ED6}
 	EndGlobalSection
 EndGlobal
