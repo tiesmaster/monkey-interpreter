@@ -1,5 +1,8 @@
 // Ignore Spelling: Lexer
 
+
+using System.Text;
+
 namespace Monkey.Lex;
 
 public class Lexer
@@ -25,7 +28,17 @@ public class Lexer
         switch (_ch)
         {
             case (byte)'=':
-                tok = new(Tokens.Assign, _ch);
+                if (PeekChar() == '=')
+                {
+                    var ch = _ch;
+                    ReadChar();
+                    var literal = Encoding.ASCII.GetString([ch, _ch]);
+                    tok = new Token(Tokens.Eq, literal);
+                }
+                else
+                {
+                    tok = new(Tokens.Assign, _ch);
+                }
                 break;
             case (byte)'+':
                 tok = new(Tokens.Plus, _ch);
@@ -34,7 +47,17 @@ public class Lexer
                 tok = new(Tokens.Minus, _ch);
                 break;
             case (byte)'!':
-                tok = new(Tokens.Bang, _ch);
+                if (PeekChar() == '=')
+                {
+                    var ch = _ch;
+                    ReadChar();
+                    var literal = Encoding.ASCII.GetString([ch, _ch]);
+                    tok = new Token(Tokens.NotEq, literal);
+                }
+                else
+                {
+                    tok = new(Tokens.Bang, _ch);
+                }
                 break;
             case (byte)'/':
                 tok = new(Tokens.Slash, _ch);
@@ -170,5 +193,17 @@ public class Lexer
 
         _position = _readPosition;
         _readPosition++;
+    }
+
+    private byte PeekChar()
+    {
+        if (_readPosition >= _input.Length)
+        {
+            return 0;
+        }
+        else
+        {
+            return (byte)_input[_readPosition];
+        }
     }
 }
