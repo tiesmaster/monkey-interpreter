@@ -68,12 +68,51 @@ public class Lexer
                 tok = new(Tokens.Eof, "");
                 break;
             default:
-                tok = new(Tokens.Illegal, "ILLEGAL");
+                if (IsLetter(_ch))
+                {
+                    var literal = ReadIdentifier();
+                    tok = new(LookupIdentifier(literal), literal);
+                }
+                else
+                {
+                    tok = new(Tokens.Illegal, "ILLEGAL");
+                }
                 break;
         }
 
         ReadChar();
         return tok;
+    }
+
+    private string LookupIdentifier(string literal)
+    {
+        var keywords = new Dictionary<string, string>
+        {
+            ["fn"] = Tokens.Function,
+            ["let"] = Tokens.Let,
+        };
+
+        return keywords.TryGetValue(literal, out var tokenType)
+            ? tokenType
+            : Tokens.Ident;
+    }
+
+    private bool IsLetter(byte ch)
+    {
+        return ('a' <= ch && ch <= 'z') ||
+            ('A' <= ch && ch <= 'Z') ||
+            ch == '_';
+    }
+
+    private string ReadIdentifier()
+    {
+        var position = _position;
+        while (IsLetter(_ch))
+        {
+            ReadChar();
+        }
+
+        return _input[position..(_readPosition - 1)];
     }
 
     private void ReadChar()
