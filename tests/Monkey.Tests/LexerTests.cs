@@ -112,11 +112,13 @@ public class LexerTests
         var lexer = new Lexer(input);
 
         // act && assert
+        var tokenNumber = 1;
         foreach (var expectedToken in expectedTokens)
         {
             var token = lexer.NextToken();
 
-            token.Should().BeEquivalentTo(expectedToken);
+            token.Should().BeEquivalentTo(expectedToken, "on token {0}", tokenNumber);
+            tokenNumber++;
 
             //token.Type.Should().Be(expectedToken.ExpectedType);
             //token.Literal.Should().Be(expectedToken.ExpectedLiteral);

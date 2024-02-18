@@ -1,7 +1,5 @@
 // Ignore Spelling: Lexer
 
-
-
 namespace Monkey.Lex;
 
 public class Lexer
@@ -72,7 +70,12 @@ public class Lexer
                 tok = new(Tokens.Eof, "");
                 break;
             default:
-                if (IsLetter(_ch))
+                if (IsInteger(_ch))
+                {
+                    var literal = ReadInteger();
+                    tok = new(Tokens.Int, literal);
+                }
+                else if (IsLetter(_ch))
                 {
                     var literal = ReadIdentifier();
                     tok = new(LookupIdentifier(literal), literal);
@@ -115,6 +118,22 @@ public class Lexer
             : Tokens.Ident;
     }
 
+    private bool IsInteger(byte ch)
+    {
+        return '0' <= ch && ch <= '9';
+    }
+
+    private string ReadInteger()
+    {
+        var position = _position;
+        while (IsInteger(_ch))
+        {
+            ReadChar();
+        }
+
+        return _input[position.._position];
+    }
+
     private bool IsLetter(byte ch)
     {
         return ('a' <= ch && ch <= 'z') ||
@@ -130,7 +149,7 @@ public class Lexer
             ReadChar();
         }
 
-        return _input[position..(_readPosition - 1)];
+        return _input[position.._position];
     }
 
     private void ReadChar()
