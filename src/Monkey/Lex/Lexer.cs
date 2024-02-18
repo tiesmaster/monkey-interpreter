@@ -23,7 +23,49 @@ public class Lexer
         switch (_ch)
         {
             case (byte)'=':
-                tok = new(Tokens.Assign, "=");
+                tok = new(Tokens.Assign, _ch);
+                break;
+            case (byte)'+':
+                tok = new(Tokens.Plus, _ch);
+                break;
+            case (byte)'-':
+                tok = new(Tokens.Minus, _ch);
+                break;
+            case (byte)'!':
+                tok = new(Tokens.Bang, _ch);
+                break;
+            case (byte)'/':
+                tok = new(Tokens.Slash, _ch);
+                break;
+            case (byte)'*':
+                tok = new(Tokens.Asterisk, _ch);
+                break;
+            case (byte)'<':
+                tok = new(Tokens.Lt, _ch);
+                break;
+            case (byte)'>':
+                tok = new(Tokens.Gt, _ch);
+                break;
+            case (byte)';':
+                tok = new(Tokens.Semicolon, _ch);
+                break;
+            case (byte)',':
+                tok = new(Tokens.Comma, _ch);
+                break;
+            case (byte)'{':
+                tok = new(Tokens.LBrace, _ch);
+                break;
+            case (byte)'}':
+                tok = new(Tokens.RBrace, _ch);
+                break;
+            case (byte)'(':
+                tok = new(Tokens.LParen, _ch);
+                break;
+            case (byte)')':
+                tok = new(Tokens.RParen, _ch);
+                break;
+            case 0:
+                tok = new(Tokens.Eof, "");
                 break;
             default:
                 tok = new(Tokens.Illegal, "ILLEGAL");
@@ -31,7 +73,6 @@ public class Lexer
         }
 
         ReadChar();
-
         return tok;
     }
 

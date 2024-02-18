@@ -1,10 +1,17 @@
 // Ignore Spelling: Eof Ident Paren foobar Eq
 
+using System.Text;
+
 namespace Monkey.Lex;
 
 public record Token(
     string Type,
-    string Literal);
+    string Literal)
+{
+    public Token(string type, byte literal) : this(type, Encoding.ASCII.GetString([literal]))
+    {
+    }
+}
 
 public static class Tokens
 {
